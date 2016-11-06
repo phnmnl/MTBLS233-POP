@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
-MAINTAINER Marco Capuccini, marco.capuccini@farmbio.uu.se
+MAINTAINER Anders Larsson, anders.larsson@icm.uu.se
 
-RUN apt-get update && apt-get install --yes openms
-ADD params_MTBLS233 /params_MTBLS233
+# Open ms
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y openms
+

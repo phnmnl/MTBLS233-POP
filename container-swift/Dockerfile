@@ -3,10 +3,6 @@
 # Run a docker registry backed by a Swift datastore.
 #
 # /usr/bin/docker run --rm \
-#   -e infile=/name/of/infile/in/swift \
-#   -e outfile=/name/of/outfile/in/swift \
-#   -e swift_container_input=name-here \
-#   -e swift_container_output=name-here \
 #   -e SETTINGS_FLAVOR=swift \
 #   -e OS_CONTAINER=docker-registry \
 #   -e OS_USERNAME=your-username \
@@ -18,11 +14,8 @@
 #   farmbio/phenomenal-swift
 #   swift upload my-swift-container myfile-in-container
 
-FROM farmbio/phenomenal-openms-swift
-MAINTAINER anders larsson <anders.larsson@icm.uu.se>
+FROM ubuntu:14.04
+MAINTAINER Anders Larsson, anders.larsson@icm.uu.se
 
-COPY params_MTBLS233 /params_MTBLS233
-COPY phenomenal /phenomenal
-
-ENTRYPOINT ["/phenomenal/peak-picking.py"] 
-
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y libffi-dev libssl-dev python-dev python-pip
+RUN pip install pyopenssl ndg-httpsclient pyasn1 python-keystoneclient python-swiftclient

@@ -1,6 +1,6 @@
 ## openms-swift installation
 
-This container adds swift to ubuntu base image
+This container adds openms and swift-objectstorage client to ubuntu base image
 
 OpenMS is also supposed to be installet but is not yet
 

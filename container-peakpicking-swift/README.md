@@ -1,7 +1,9 @@
 ## OpenMS - Swift container - peak-picking example
 
-This container adds script ``phenomenal/peak-picking.py``  that demonstrates downloading and uploading with Swift (the openMS peakpicking is just mock at the moment)
+This container adds script ``phenomenal/peak-picking.py``  that demonstrates downloading and uploading with Swift obectstorage (the openMS peakpicking is just mock at the moment)
 
+This container also adds OpenMS parameters for analysis MTBLS233 in directory ``/params_MTBLS233``
+  
 The container builds on container: ``farmbio/phenomenal-openms-swift``
 
 ### Build container 
