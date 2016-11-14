@@ -22,7 +22,7 @@ FROM farmbio/phenomenal-openms-swift
 MAINTAINER anders larsson <anders.larsson@icm.uu.se>
 
 COPY params_MTBLS233 /params_MTBLS233
-COPY phenomenal /phenomenal
+COPY bin /bin
 
-ENTRYPOINT ["/phenomenal/peak-picking.py"] 
+# ENTRYPOINT ["/bin/peak-picking.py"] 
 
