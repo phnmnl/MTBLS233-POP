@@ -22,11 +22,7 @@ try:
 except Exception as err: 
    print "Missing mandatory environment variable:" + format(err)
    raise
-
-# get command from commandline (specified after the call to this script)
-commandline = "FeatureFinderMetabo -in {infile} -out {outfile} -ini {paramfile}"
-paramfile = "/params_MTBLS233/FFparam.ini"
-
+   
 try:
    # swift local download directory
    swift_download_dir = "/swift_download"
@@ -65,8 +61,14 @@ try:
    if not os.path.exists(local_outpath):
        os.makedirs(local_outpath)
    
+   # get openMS command from commandline, first copy args to new list
+   args = list(sys.argv)
+   # remove first arg which is the name of this script - rest of args should be openMS command
+   del args[0]
+   commandAndArgs = " ".join(args)
+   # replace parameters (infile, outfile) with the local files from the swift operations
+   command = commandAndArgs.format(infile=local_infile, outfile=outfilename)
    # Run the openMS command
-   command = commandline.format(infile=local_infile, outfile=outfilename, paramfile=paramfile)
    starttime_mscommand = time.time()
    stdout = subprocess.check_output(command, shell=True)
    mscommandtime = time.time() - starttime_mscommand;
