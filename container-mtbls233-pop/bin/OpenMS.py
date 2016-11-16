@@ -67,6 +67,7 @@ try:
    del args[0]
    commandAndArgs = " ".join(args)
    # replace parameters (infile, outfile) with the local files from the swift operations
+   print commandAndArgs
    command = commandAndArgs.format(infile=local_infile, outfile=outfilename)
    # Run the openMS command
    starttime_mscommand = time.time()
@@ -86,7 +87,11 @@ try:
    print "mscommandtime=" + "{0:.2f}".format(mscommandtime)
 
 except Exception as e:
-   print "Errormessage:" + e.output
+   print "Errormessage:" + format(e)
+   raise
+except CalledProcessError as procerr:
+   print "Exception output:" + procerr.output
+   print "Exception formated:" + format(procerr)
    raise
 
 print "Done " + __file__
