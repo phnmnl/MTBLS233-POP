@@ -39,10 +39,10 @@ metadata:
   name: luigid
 spec:
   rules:
-  - host: mtbls233.uservices.cloud
+  - host: luigi.mtbls233.uservices.cloud
     http:
       paths:
-      - path: /luigi
+      - path: /
         backend:
           serviceName: luigi-service
           servicePort: http
