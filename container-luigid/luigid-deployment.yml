@@ -39,7 +39,7 @@ metadata:
   name: luigid
 spec:
   rules:
-  - host: luigi.mtbls233.uservices.cloud
+  - host: luigi.phenomenal.cloud
     http:
       paths:
       - path: /
