@@ -1,0 +1,27 @@
+---
+cluster_prefix: vre 
+host_cloud: openstack
+kubeadm_token: "{{lookup('file', '.kubeadm_token')}}"
+floating_ip_pool: "ext-net"
+external_network_uuid: "9e031103-e161-4e71-8740-24cd16beb239"
+master_flavor: "2C-4GB-50GB"
+node_count: 1
+node_flavor: "2C-4GB-50GB"
+edge_count: 2
+edge_flavor: "2C-4GB-50GB"
+
+all_nodes_count: 4
+
+# larger version... 4C-8GB-100GB
+spark_master_flavor_name: "2C-4GB-50GB"
+spark_worker_flavor_name: "2C-4GB-50GB"
+spark_worker_count: 2
+spark_worker_volume_size: 100
+spark_master_volume_size: 100
+
+cf_mail: "{{ lookup('env','TF_VAR_cloudflare_email') }}"
+cf_token: "{{ lookup('env','TF_VAR_cloudflare_token') }}"
+cf_zone: "{{ lookup('env','TF_VAR_cloudflare_domain') }}"
+cf_subdomain: "{{cluster_prefix}}"
+
+domain_name: "{{cf_subdomain}}.{{cf_zone}}"

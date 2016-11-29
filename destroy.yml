@@ -1,0 +1,25 @@
+---
+# This tests also weave-network and traefik-lb (implicitly)
+# TODO: make explicit tests for weave-network and traefik-lb
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  force_handlers: True
+  vars:
+    host_cloud: openstack
+  tasks:
+    - name: "clean cloudflare"
+      command: ansible-playbook -e @deployment-variables.yml KubeNow/playbooks/clean-cloudflare.yml
+      ignore_errors: yes
+
+    - name: "terraform destroy --force (SparkNow)"
+      command: terraform destroy --force
+      ignore_errors: yes
+      args:
+        chdir: "{{playbook_dir}}/SparkNow/terraform"
+    
+    - name: "terraform destroy --force {{host_cloud}} (KubeNow)"
+      command: terraform destroy --force {{host_cloud}}
+      ignore_errors: yes
+      args:
+        chdir: "{{playbook_dir}}/KubeNow"
