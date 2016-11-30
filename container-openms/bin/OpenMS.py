@@ -5,11 +5,9 @@ import subprocess
 import time
 import glob
 
-#
-# Currently using command line client instead of direct python bindings
-#
+
+# Run Example:
 # FeatureFinderMetabo -in {infile} -out {outfile} -ini {paramfile}
-#
 
 print "Inside " + __file__
 
