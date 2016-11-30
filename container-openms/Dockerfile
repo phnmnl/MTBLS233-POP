@@ -1,7 +1,7 @@
 # swift, openMS, parameters etc. for the MTBLS233-POP project
 
 FROM ubuntu:14.04
-MAINTAINER anders larsson <anders.larsson@icm.uu.se>
+MAINTAINER Anders Larsson <anders.larsson@icm.uu.se>
 
 # Install OpenMS & Swift -requirements 
 RUN apt-get update -y && \
