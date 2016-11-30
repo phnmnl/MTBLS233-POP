@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: jupyter
-        image: jupyter/all-spark-notebook
+        image: farmbio/mtbls233-jupyter
         args:
           - "start-notebook.sh"
           - "--NotebookApp.password='{{sha1_pass}}'"
