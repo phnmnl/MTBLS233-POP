@@ -29,9 +29,9 @@
         dest: "{{playbook_dir}}/KubeNow/stacks/traefik-lb/roles/cloudflare/vars/conf.yml"
     
     - name: "deploy traefic"
-      command: ansible-playbook KubeNow/stacks/traefik-lb/main.yml
+      command: ansible-playbook --private-key {{playbook_dir}}/vre.key KubeNow/stacks/traefik-lb/main.yml
         
     - name: "deploy luigi"
-      command: ansible-playbook -e 'domain_name={{domain_name}}' deployment/main.yml
+      command: ansible-playbook --private-key {{playbook_dir}}/vre.key -e 'domain_name={{domain_name}}' deployment/main.yml
 
 
