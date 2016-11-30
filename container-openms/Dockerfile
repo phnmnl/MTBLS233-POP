@@ -6,10 +6,20 @@ MAINTAINER Anders Larsson <anders.larsson@icm.uu.se>
 # Install OpenMS & Swift -requirements 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y openms libffi-dev libssl-dev python-dev python-pip
+    apt-get install -y \ 
+        openms \
+        libffi-dev \
+        libssl-dev \
+        python-dev \
+        python-pip
 
 # Install Swift-pythonclient
-RUN pip install pyopenssl ndg-httpsclient pyasn1 python-keystoneclient python-swiftclient
+RUN pip install \
+    pyopenssl \
+    ndg-httpsclient \
+    pyasn1 \
+    python-keystoneclient \
+    python-swiftclient
 
 # project parameterfiles
 COPY params_MTBLS233 /params_MTBLS233
