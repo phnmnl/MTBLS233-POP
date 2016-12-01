@@ -43,6 +43,7 @@ try:
    downloadtime = time.time() - starttime_download;
    print "stdout: " + stdout
 
+   infilesize = os.path.getsize(local_infile)
    
    # if local infile is a dir then expand it to all files
    if os.path.isdir(local_infile):
@@ -50,7 +51,8 @@ try:
       allFiles = ""
       print "allFilesPath=" + allFilesPath
       for aFile in glob.glob(allFilesPath):
-   	   allFiles += aFile + " "
+   	      allFiles += aFile + " "
+   	      infilesize += os.path.getsize(aFile)
    	   
       local_infile = allFiles
    
@@ -78,10 +80,20 @@ try:
    starttime_upload = time.time()
    stdout = subprocess.check_output(["swift", "upload", outcontainer, outfilename])
    uploadtime = time.time() - starttime_upload;
+   outfilesize = os.path.getsize(outfilename)
    print "stdout: " + stdout
    
+   
+   MB = 1000000.0
+   downloadspeed = (infilesize/downloadtime)/MB
+   uploadspeed = (outfilesize/uploadtime)/MB
+   
    print "downloadtime=" + "{0:.2f}".format(downloadtime)
+   print "downloadsize=" + "{0:.2f}".format(infilesize)
+   print "downloadspeed=" + "{0:.2f} MB/sek".format(downloadspeed)
    print "uploadtime=" + "{0:.2f}".format(uploadtime)
+   print "uploadsize=" + "{0:.2f}".format(outfilesize)
+   print "uploadspeed=" + "{0:.2f} MB/sek".format(uploadspeed)
    print "mscommandtime=" + "{0:.2f}".format(mscommandtime)
 
 except Exception as e:
