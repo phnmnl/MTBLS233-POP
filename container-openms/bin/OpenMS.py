@@ -11,6 +11,17 @@ import glob
 
 print "Inside " + __file__
 
+# first parse input if environment vars is inputed as
+# one single comma separated environment var
+if "envparams" in os.environ:
+   inparams = os.environ["envparams"]
+   splitted = inparams.split(",")
+   for onepart in splitted:
+       param = onepart.split("=")
+       paramName = param[0]
+       paramVal = param[1]
+       os.environ[paramName] = paramVal
+
 # read input vars from environment
 try:
    infilename = os.environ["infile"]
