@@ -1,12 +1,10 @@
 FROM jupyter/all-spark-notebook
 MAINTAINER Marco Capuccini, marco.capuccini@farmbio.uu.se
 
-USER root
-
 # Install Hadoop
+USER root
 ADD bin/install-hadoop.sh tmp/install-hadoop.sh
 RUN tmp/install-hadoop.sh && rm -Rf tmp/
-
 # Set evnironment
 ENV HADOOP_HOME=/opt/hadoop/default
 ENV PATH=$PATH:$HADOOP_HOME/bin
@@ -18,5 +16,8 @@ ENV YARN_HOME=$HADOOP_HOME
 ENV HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 ENV HADOOP_OPTS=-Djava.library.path=$HADOOP_HOME/lib
 ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-
 USER $NB_USER
+
+# Install Luigi
+RUN pip install git+https://github.com/mcapuccini/luigi.git@feature/k8s-task
+RUN pip install pykube
