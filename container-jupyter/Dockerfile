@@ -28,6 +28,12 @@ RUN pip install \
   git+https://github.com/mcapuccini/luigi.git@feature/k8s-task \
   pykube
 
+# Configure Luigi
+USER root
+RUN mkdir -p /etc/luigi
+ADD client.cfg /etc/luigi
+USER $NB_USER
+
 # Add notebooks
 RUN git clone https://github.com/phnmnl/MTBLS233-notebooks.git /home/jovyan/work
 VOLUME /home/jovyan/work
