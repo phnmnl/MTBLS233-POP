@@ -4,3 +4,6 @@
 [submodule "SparkNow"]
 	path = SparkNow
 	url = https://github.com/mcapuccini/SparkNow.git
+[submodule "container-jupyter/MTBLS233-notebooks"]
+	path = container-jupyter/MTBLS233-notebooks
+	url = git@github.com:phnmnl/MTBLS233-notebooks.git
