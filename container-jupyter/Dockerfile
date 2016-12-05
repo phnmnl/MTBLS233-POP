@@ -21,3 +21,7 @@ USER $NB_USER
 # Install Luigi
 RUN pip install git+https://github.com/mcapuccini/luigi.git@feature/k8s-task
 RUN pip install pykube
+
+# Add notebooks
+RUN git clone https://github.com/phnmnl/MTBLS233-notebooks.git /home/jovyan/work
+VOLUME /home/jovyan/work
