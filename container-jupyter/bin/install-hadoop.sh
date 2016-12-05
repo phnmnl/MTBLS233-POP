@@ -24,4 +24,10 @@ tar xzf /tmp/$HADOOP_TGZ -C /opt/hadoop/
 ln -s /opt/hadoop/$HADOOP_PACKAGE_NAME /opt/hadoop/default
 chown hduser:hadoop -R /opt/hadoop/
 
+echo "Installing Swift integration"
+mkdir -p /opt/hadoop-openstack/jars
+wget \
+  http://tarballs.openstack.org/sahara/dist/hadoop-openstack/master/hadoop-openstack-2.7.1.jar \
+  -O /opt/hadoop-openstack/jars/hadoop-openstack-2.7.1.jar
+
 echo "$HADOOP_PACKAGE_NAME installation complete."
