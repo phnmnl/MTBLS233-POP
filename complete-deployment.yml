@@ -9,7 +9,6 @@
 
   roles:
     - setup-kubenow
-    - setup-sparknow
     
   tasks:
   
@@ -32,6 +31,6 @@
       command: ansible-playbook --private-key {{playbook_dir}}/vre.key KubeNow/stacks/traefik-lb/main.yml
         
     - name: "deploy luigi"
-      command: ansible-playbook --private-key {{playbook_dir}}/vre.key -e 'domain_name={{domain_name}}' deployment/main.yml
+      command: ansible-playbook --private-key {{playbook_dir}}/vre.key -e 'domain_name={{domain_name}}' -e 'envparams={{envparams}}' deployment/main.yml
 
 

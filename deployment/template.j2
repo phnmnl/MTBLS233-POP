@@ -23,6 +23,9 @@ spec:
         args:
           - "start-notebook.sh"
           - "--NotebookApp.password='{{sha1_pass}}'"
+        env:
+          - name: envparams
+            value: "{{envparams}}"
         ports:
         - containerPort: 8888
 ---
