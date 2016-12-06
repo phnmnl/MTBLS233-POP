@@ -1,0 +1,61 @@
+---
+- hosts: localhost
+
+  # Conf
+  connection: local
+  gather_facts: False
+
+  vars:
+    # Common
+    host_cloud: "openstack"
+    all_nodes_count: "{{ 1 + node_count + edge_count}}"
+    kubeadm_token: "{{lookup('file', '.kubeadm_token')}}"
+    # DNS
+    cf_subdomain: "{{cluster_prefix}}"
+    domain_name: "{{cf_subdomain}}.{{cf_zone}}"
+    # OpenStack Environment
+    os_auth_url: "{{ lookup('env','OS_AUTH_URL') }}"
+    os_auth_version: "{{ lookup('env','OS_AUTH_VERSION') }}"
+    os_tenant_name: "{{ lookup('env','OS_TENANT_NAME') }}"
+    os_tenant_id: "{{ lookup('env','OS_TENANT_ID') }}"
+    os_region_name: "{{ lookup('env','OS_REGION_NAME') }}"
+    os_user_domain_id: "{{ lookup('env','OS_USER_DOMAIN_ID') }}"
+    os_username: "{{ lookup('env','OS_USERNAME') }}"
+    os_password: "{{ lookup('env','OS_PASSWORD') }}"
+
+  roles:
+    - setup-kubenow
+
+  tasks:
+    - name: "wait until all nodes have bootstraped and joined cluster"
+      command: >
+        sh -c
+        'ansible master -a "kubectl get nodes" | grep "Ready" | wc -l'
+      register: kubectl
+      until: "{{kubectl.stdout|trim}} == {{all_nodes_count}}"
+      retries: 60
+      delay: 10
+    - name: "render cloudflare configuration"
+      template:
+      args:
+        src: "{{playbook_dir}}/templates/cloudflare.conf.yml.j2"
+        dest: "{{playbook_dir}}/KubeNow/stacks/traefik-lb/roles/cloudflare/vars/conf.yml"
+    - name: "deploy traefik"
+      command: >
+        ansible-playbook
+        --private-key
+        {{playbook_dir}}/vre.key KubeNow/stacks/traefik-lb/main.yml
+    - name: "deploy jupyter and luigi"
+      command: >
+        ansible-playbook
+        --private-key {{playbook_dir}}/vre.key
+        -e 'domain_name={{domain_name}}'
+        -e 'os_auth_url={{os_auth_url}}'
+        -e 'os_auth_version={{os_auth_version}}'
+        -e 'os_tenant_name={{os_tenant_name}}'
+        -e 'os_tenant_id={{os_tenant_id}}'
+        -e 'os_region_name={{os_region_name}}'
+        -e 'os_user_domain_id={{os_user_domain_id}}'
+        -e 'os_username={{os_username}}'
+        -e 'os_password={{os_password}}'
+        deployment/main.yml

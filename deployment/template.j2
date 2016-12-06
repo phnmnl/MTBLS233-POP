@@ -23,6 +23,23 @@ spec:
         args:
           - "start-notebook.sh"
           - "--NotebookApp.password='{{sha1_pass}}'"
+        env:
+          - name: OS_AUTH_URL
+            value: "{{os_auth_url}}"
+          - name: OS_AUTH_VERSION
+            value: "{{os_auth_version}}"
+          - name: OS_TENANT_NAME
+            value: "{{os_tenant_name}}"
+          - name: OS_TENANT_ID
+            value: "{{os_tenant_id}}"
+          - name: OS_REGION_NAME
+            value: "{{os_region_name}}"
+          - name: OS_USER_DOMAIN_ID
+            value: "{{os_user_domain_id}}"
+          - name: OS_USERNAME
+            value: "{{os_username}}"
+          - name: OS_PASSWORD
+            value: "{{os_password}}"
         ports:
         - containerPort: 8888
         resources:

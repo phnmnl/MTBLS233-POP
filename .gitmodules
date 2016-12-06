@@ -1,6 +1,3 @@
 [submodule "KubeNow"]
 	path = KubeNow
 	url = https://github.com/kubenow/KubeNow.git
-[submodule "SparkNow"]
-	path = SparkNow
-	url = https://github.com/mcapuccini/SparkNow.git
