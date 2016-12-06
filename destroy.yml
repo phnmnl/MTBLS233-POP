@@ -5,6 +5,9 @@
   connection: local
   gather_facts: False
 
+  vars:
+    host_cloud: "openstack"
+
   tasks:
 
     - name: "clean cloudflare"

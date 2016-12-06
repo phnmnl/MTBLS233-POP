@@ -1,4 +1,5 @@
 .secret
+*.retry
 */*.retry
 conf.yml
 .kubeadm_token
