@@ -1,0 +1,21 @@
+---
+# Common cluster configuration
+cluster_prefix: "mtbls233"
+floating_ip_pool: "your-ip-pool"
+external_network_uuid: "your-ext-net-uuid"
+
+# Master configuration
+master_flavor: "your-master-flavor"
+
+# Node configuration
+node_count: 10
+node_flavor: "your-node-flavor"
+
+# Edge configuration
+edge_count: 2
+edge_flavor: "your-edge-count"
+
+# Cloudflare configuration
+cf_mail: "your-cloudflare-mail"
+cf_token: "your-cloudflare-token"
+cf_zone: "your-cloudflare-zone"
