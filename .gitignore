@@ -1,2 +1,7 @@
 .secret
+*.retry
 */*.retry
+conf.yml
+.kubeadm_token
+vre.key
+vre.key.pub

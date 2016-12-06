@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+
+  # Conf
+  connection: local
+  gather_facts: False
+
+  vars:
+    host_cloud: "openstack"
+
+  tasks:
+
+    - name: "clean cloudflare"
+      command: >
+        ansible-playbook
+        -e @conf.yml
+        KubeNow/playbooks/clean-cloudflare.yml
+
+    - name: "terraform destroy"
+      command: >
+        terraform destroy --force {{host_cloud}}
+      args:
+        chdir: "{{playbook_dir}}/KubeNow"

@@ -1,0 +1,15 @@
+- name: "render tfvars"
+  template:
+  args:
+    src: "{{host_cloud}}.tfvars.j2"
+    dest: "{{playbook_dir}}/KubeNow/terraform.tfvars"
+
+- name: "terraform get {{host_cloud}}"
+  command: terraform get {{host_cloud}}
+  args:
+    chdir: "{{playbook_dir}}/KubeNow"
+
+- name: "terraform apply {{host_cloud}}"
+  command: terraform apply {{host_cloud}}
+  args:
+    chdir: "{{playbook_dir}}/KubeNow"
