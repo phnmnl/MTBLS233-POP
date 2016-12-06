@@ -1,36 +1,35 @@
 ---
-
 - hosts: localhost
   connection: local
   gather_facts: False
   force_handlers: True
-  
-  vars:
 
   roles:
     - setup-kubenow
-    
+
   tasks:
-  
     - name: "wait until all nodes have bootstraped and joined cluster"
       command: >
-        sh -c 'ansible master -a "kubectl get nodes" | grep "Ready" | wc -l'
+        sh -c
+        'ansible master -a "kubectl get nodes" | grep "Ready" | wc -l'
       register: kubectl
       until: "{{kubectl.stdout|trim}} == {{all_nodes_count}}"
-      # Try for 10 minutes
       retries: 60
-      delay: 10 
-      
+      delay: 10
     - name: "render cloudflare configuration"
       template:
       args:
         src: "{{playbook_dir}}/templates/cloudflare.conf.yml.j2"
         dest: "{{playbook_dir}}/KubeNow/stacks/traefik-lb/roles/cloudflare/vars/conf.yml"
-    
     - name: "deploy traefic"
-      command: ansible-playbook --private-key {{playbook_dir}}/vre.key KubeNow/stacks/traefik-lb/main.yml
-        
+      command: >
+        ansible-playbook
+        --private-key
+        {{playbook_dir}}/vre.key KubeNow/stacks/traefik-lb/main.yml
     - name: "deploy luigi"
-      command: ansible-playbook --private-key {{playbook_dir}}/vre.key -e 'domain_name={{domain_name}}' -e 'envparams={{envparams}}' deployment/main.yml
-
-
+      command: >
+        ansible-playbook
+        --private-key {{playbook_dir}}/vre.key
+        -e 'domain_name={{domain_name}}'
+        -e 'envparams={{envparams}}'
+        deployment/main.yml
