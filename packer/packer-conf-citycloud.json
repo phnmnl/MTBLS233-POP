@@ -1,0 +1,8 @@
+
+{
+  "image_name": "mtbls233",
+  "source_image_name": "KubeNow",
+  "network": "73cd6c82-058c-43b7-9025-9816cb6b1b7e",
+  "flavor": "2C-4GB-50GB",
+  "floating_ip_pool": "ext-net"
+}
