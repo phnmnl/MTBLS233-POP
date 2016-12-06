@@ -13,5 +13,3 @@
   command: terraform apply {{host_cloud}}
   args:
     chdir: "{{playbook_dir}}/KubeNow"
-    
-# notify: "terraform destroy {{host_cloud}}"
