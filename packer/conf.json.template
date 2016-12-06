@@ -1,0 +1,8 @@
+
+{
+  "image_name": "phenomenal-mtbls233",
+  "source_image_name": "kubenow-image",
+  "network": "your-external-network",
+  "flavor": "your-instance-flavor",
+  "floating_ip_pool": "ext-net"
+}
