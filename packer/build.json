@@ -22,7 +22,7 @@
 	"provisioners": [
 		{
 			"type": "shell",
-			"script": "{{pwd}}/packer/mtbls233_additional_requirements.sh"
+			"script": "{{pwd}}/packer/provisioner.sh"
 		}
 	]
 }
