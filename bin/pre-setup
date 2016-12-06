@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Generate password for jupyter/luigi
-set-password
+bin/set-password
 
 # Generate ssh-key
 echo -e  'n' | ssh-keygen -q -t rsa -N "" -f ./vre.key 1> /dev/null
